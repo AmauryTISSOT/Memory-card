@@ -27,36 +27,76 @@ const Card = (props) => {
 
     // random color hook
     const [color, setColor] = useState(randomColorGenerator())
+    const [colorArray, setColorArray] = useState([])
     
     // function who return the clicked color and generate new random color
     const clickHandler = (event) => {
         const clickColor = event.target.style.backgroundColor
-        console.log(clickColor);
+        // console.log(clickColor);
+        // console.log(colorArray);
         setColor(randomColorGenerator())
-        scoreHandler(clickColor)
+        scoreHandler(colorArray, setColorArray, clickColor, props)
     }
 
 
     // function who change props.score 
-    const scoreHandler = (clickedColor) => {
-        let colorScoreArray = [];
-        colorScoreArray.push(clickedColor)
+    
+    const scoreHandler = (arrayHook,setHook,clickedColor, props) => {
+        setHook([...arrayHook,clickedColor])
         props.setScore(props.score + 1)
-        if (colorScoreArray.includes(clickedColor)) {
+        console.log(props.bestScore)
+        if (arrayHook.includes(clickedColor)) {
             props.setScore(0)
+            setHook([])
         }
+        if (props.bestScore < props.score){
+            props.setBestScore(props.score)
+        }
+        console.log(arrayHook)
     }
 
   return (
     <div className='Card'>
-        <div id='0' style={{backgroundColor : `${color[0]}`}} onClick={clickHandler}>0</div>
-        <div id='1' style={{backgroundColor : `${color[1]}`}} onClick={clickHandler}>1</div>
-        <div id='2' style={{backgroundColor : `${color[2]}`}} onClick={clickHandler}>2</div>
-        <div id='3' style={{backgroundColor : `${color[3]}`}} onClick={clickHandler}>3</div>
-        <div id='4' style={{backgroundColor : `${color[4]}`}} onClick={clickHandler}>4</div>
-        <div id='5' style={{backgroundColor : `${color[5]}`}} onClick={clickHandler}>5</div>
-        <div id='6' style={{backgroundColor : `${color[6]}`}} onClick={clickHandler}>6</div>
-        <div id='7' style={{backgroundColor : `${color[7]}`}} onClick={clickHandler}>7</div>
+        <div className='Square' id='0' 
+        style={{backgroundColor : `${color[0]}`}} 
+        onClick={clickHandler}>
+
+        </div>
+        <div className='Square' id='1' 
+        style={{backgroundColor : `${color[1]}`}} 
+        onClick={clickHandler}>
+
+        </div>
+        <div className='Square' id='2' 
+        style={{backgroundColor : `${color[2]}`}} 
+        onClick={clickHandler}>
+
+        </div>
+        <div className='Square' id='3' 
+        style={{backgroundColor : `${color[3]}`}} 
+        onClick={clickHandler}>
+
+        </div>
+        <div className='Square' id='4' 
+        style={{backgroundColor : `${color[4]}`}} 
+        onClick={clickHandler}>
+
+        </div>
+        <div className='Square' id='5' 
+        style={{backgroundColor : `${color[5]}`}} 
+        onClick={clickHandler}>
+
+        </div>
+        <div className='Square' id='6' 
+        style={{backgroundColor : `${color[6]}`}} 
+        onClick={clickHandler}>
+
+        </div>
+        <div className='Square' id='7' 
+        style={{backgroundColor : `${color[7]}`}} 
+        onClick={clickHandler}>
+
+        </div>
     </div>
   )
 }
