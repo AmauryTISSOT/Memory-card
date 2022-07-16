@@ -2,26 +2,19 @@ import React, { useState, useEffect } from 'react'
 
 const Card = (props) => {
     
-    const CreateCard = () => {
-        for (let index = 0; index < 8; index++) {
-            return (
-                <div>{index}</div>
-                )
-            }
+    // function who generate random color
+    const randomColorGenerator = () => {
+        let randomNumberArray = [];
+    let value = true;
+    while(value){
+        let random = Math.floor(Math.random() * 8)
+        if(!randomNumberArray.includes(random)){
+            randomNumberArray.push(random);
         }
-        
-        const randomColorGenerator = () => {
-            let randomNumberArray = [];
-        let value = true;
-        while(value){
-            let random = Math.floor(Math.random() * 8)
-            if(!randomNumberArray.includes(random)){
-                randomNumberArray.push(random);
-            }
-            if(randomNumberArray.length === 8){
-                value = false
-            }
+        if(randomNumberArray.length === 8){
+            value = false
         }
+    }
     let basicColorArray = ['red','green','blue','black','yellow','orange','grey','brown'];
     let randomColorArray = [];
     for (let i = 0; i < 8; i++) {
@@ -31,20 +24,29 @@ const Card = (props) => {
         }
     return randomColorArray
     };
-    
+
+    // random color hook
     const [color, setColor] = useState(randomColorGenerator())
+    
+    // function who return the clicked color and generate new random color
+    const clickHandler = (event) => {
+        const clickColor = event.target.style.backgroundColor
+        console.log(clickColor);
+        setColor(randomColorGenerator())
+        return clickColor
+    }
+
 
   return (
-    <div>
-        <CreateCard/>
-        <div>{color[0]}</div>
-        <div>{color[1]}</div>
-        <div></div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
+    <div className='Card'>
+        <div id='0' style={{backgroundColor : `${color[0]}`}} onClick={clickHandler}>0</div>
+        <div id='1' style={{backgroundColor : `${color[1]}`}} onClick={clickHandler}>1</div>
+        <div id='2' style={{backgroundColor : `${color[2]}`}} onClick={clickHandler}>2</div>
+        <div id='3' style={{backgroundColor : `${color[3]}`}} onClick={clickHandler}>3</div>
+        <div id='4' style={{backgroundColor : `${color[4]}`}} onClick={clickHandler}>4</div>
+        <div id='5' style={{backgroundColor : `${color[5]}`}} onClick={clickHandler}>5</div>
+        <div id='6' style={{backgroundColor : `${color[6]}`}} onClick={clickHandler}>6</div>
+        <div id='7' style={{backgroundColor : `${color[7]}`}} onClick={clickHandler}>7</div>
     </div>
   )
 }
