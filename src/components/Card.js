@@ -33,9 +33,19 @@ const Card = (props) => {
         const clickColor = event.target.style.backgroundColor
         console.log(clickColor);
         setColor(randomColorGenerator())
-        return clickColor
+        scoreHandler(clickColor)
     }
 
+
+    // function who change props.score 
+    const scoreHandler = (clickedColor) => {
+        let colorScoreArray = [];
+        colorScoreArray.push(clickedColor)
+        props.setScore(props.score + 1)
+        if (colorScoreArray.includes(clickedColor)) {
+            props.setScore(0)
+        }
+    }
 
   return (
     <div className='Card'>
