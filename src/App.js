@@ -1,11 +1,12 @@
-
 import './App.css';
-import Header from './Header';
+import Header from './components/Header';
+import Card from './components/Card'
 
 function App() {
   return (
     <div className="App">
      <Header content = {'Memory Card Game'}/>
+     <Card/>
     </div>
   );
 }
