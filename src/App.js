@@ -1,10 +1,11 @@
 
 import './App.css';
+import Header from './Header';
 
 function App() {
   return (
     <div className="App">
-     hello world
+     <Header content = {'Memory Card Game'}/>
     </div>
   );
 }
